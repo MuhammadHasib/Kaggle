@@ -37,3 +37,5 @@ def detect_outliers(df,n,features):
     multiple_outliers = list( k for k, v in outlier_indices.items() if v > n )
     
     return multiple_outliers
+Outliers_to_drop = detect_outliers(df_train,2,["Age","SibSp","Parch","Fare"])
+df_train = df_train.drop(Outliers_to_drop, axis = 0).reset_index(drop=True)
