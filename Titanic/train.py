@@ -98,3 +98,11 @@ df_test["Title"] = df_test["Title"].replace(['Lady', 'the Countess','Countess','
 df_test["Title"] = df_test["Title"].map({"Master":0, "Miss":1, "Ms" : 1 , "Mme":1, "Mlle":1, "Mrs":1, "Mr":2, "Rare":3})
 df_test["Title"] = df_test["Title"].astype(int)
 df_test.drop(labels = ["Name"], axis = 1, inplace = True)
+
+df_test.drop(['Ticket','Cabin'],axis = 1, inplace= True)
+df_test['Age'] = df_test[['Age','Pclass']].apply(impute_age,axis=1)
+sex = pd.get_dummies(df_test['Sex'],drop_first=True)
+embark = pd.get_dummies(df_test['Embarked'],drop_first=True)
+df_test = pd.concat([df_test,sex,embark],axis=1)
+
+df_test['Fare'].fillna(value=df_test['Fare'].median(),inplace=True)
