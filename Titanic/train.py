@@ -83,3 +83,6 @@ def impute_fare(cols):
     else:
         return Fare
 df_train['Age'] = df_train[['Age','Pclass']].apply(impute_age,axis=1)
+sex = pd.get_dummies(df_train['Sex'],drop_first=True)
+embark = pd.get_dummies(df_train['Embarked'],drop_first=True)
+df_train = pd.concat([df_train,sex,embark],axis=1)
