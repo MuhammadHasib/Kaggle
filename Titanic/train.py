@@ -91,3 +91,10 @@ df_train['Single'] = df_train['Family'].map(lambda s: 1 if s == 1 else 0)
 df_train['SmallF'] = df_train['Family'].map(lambda s: 1 if  s == 2  else 0)
 df_train['MedF']   = df_train['Family'].map(lambda s: 1 if 3 <= s <= 4 else 0)
 df_train['LargeF'] = df_train['Family'].map(lambda s: 1 if s >= 5 else 0)
+
+dataset_title = [i.split(",")[1].split(".")[0].strip() for i in df_test["Name"]]
+df_test["Title"] = pd.Series(dataset_title)
+df_test["Title"] = df_test["Title"].replace(['Lady', 'the Countess','Countess','Capt', 'Col','Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
+df_test["Title"] = df_test["Title"].map({"Master":0, "Miss":1, "Ms" : 1 , "Mme":1, "Mlle":1, "Mrs":1, "Mr":2, "Rare":3})
+df_test["Title"] = df_test["Title"].astype(int)
+df_test.drop(labels = ["Name"], axis = 1, inplace = True)
