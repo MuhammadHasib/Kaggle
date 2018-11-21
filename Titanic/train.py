@@ -46,3 +46,22 @@ df_train["Title"] = df_train["Title"].replace(['Lady', 'the Countess','Countess'
 df_train["Title"] = df_train["Title"].map({"Master":0, "Miss":1, "Ms" : 1 , "Mme":1, "Mlle":1, "Mrs":1, "Mr":2, "Rare":3})
 df_train["Title"] = df_train["Title"].astype(int)
 df_train.drop(labels = ["Name"], axis = 1, inplace = True)
+df_train.drop(['Cabin','Ticket'],axis = 1, inplace= True)
+
+def impute_age(cols):
+    Age = cols[0]
+    Pclass = cols[1]
+    
+    if pd.isnull(Age):
+
+        if Pclass == 1:
+            return 37
+
+        elif Pclass == 2:
+            return 29
+
+        else:
+            return 24
+
+    else:
+        return Age
