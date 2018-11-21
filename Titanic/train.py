@@ -106,3 +106,11 @@ embark = pd.get_dummies(df_test['Embarked'],drop_first=True)
 df_test = pd.concat([df_test,sex,embark],axis=1)
 
 df_test['Fare'].fillna(value=df_test['Fare'].median(),inplace=True)
+df_test['Fare'] = df_test[['Fare','Pclass']].apply(impute_fare,axis=1)
+df_test["Fare"] = df_test["Fare"].map(lambda i: np.log(i) if i > 0 else 0)
+df_test["Family"] = df_test["SibSp"] + df_test["Parch"] + 1
+
+df_test['Single'] = df_test['Family'].map(lambda s: 1 if s == 1 else 0)
+df_test['SmallF'] = df_test['Family'].map(lambda s: 1 if  s == 2  else 0)
+df_test['MedF']   = df_test['Family'].map(lambda s: 1 if 3 <= s <= 4 else 0)
+df_test['LargeF'] = df_test['Family'].map(lambda s: 1 if s >= 5 else 0)
