@@ -39,3 +39,10 @@ def detect_outliers(df,n,features):
     return multiple_outliers
 Outliers_to_drop = detect_outliers(df_train,2,["Age","SibSp","Parch","Fare"])
 df_train = df_train.drop(Outliers_to_drop, axis = 0).reset_index(drop=True)
+
+dataset_title = [i.split(",")[1].split(".")[0].strip() for i in df_train["Name"]]
+df_train["Title"] = pd.Series(dataset_title)
+df_train["Title"] = df_train["Title"].replace(['Lady', 'the Countess','Countess','Capt', 'Col','Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'Dona'], 'Rare')
+df_train["Title"] = df_train["Title"].map({"Master":0, "Miss":1, "Ms" : 1 , "Mme":1, "Mlle":1, "Mrs":1, "Mr":2, "Rare":3})
+df_train["Title"] = df_train["Title"].astype(int)
+df_train.drop(labels = ["Name"], axis = 1, inplace = True)
