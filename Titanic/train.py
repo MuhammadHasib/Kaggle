@@ -86,3 +86,8 @@ df_train['Age'] = df_train[['Age','Pclass']].apply(impute_age,axis=1)
 sex = pd.get_dummies(df_train['Sex'],drop_first=True)
 embark = pd.get_dummies(df_train['Embarked'],drop_first=True)
 df_train = pd.concat([df_train,sex,embark],axis=1)
+df_train["Family"] = df_train["SibSp"] + df_train["Parch"] + 1
+df_train['Single'] = df_train['Family'].map(lambda s: 1 if s == 1 else 0)
+df_train['SmallF'] = df_train['Family'].map(lambda s: 1 if  s == 2  else 0)
+df_train['MedF']   = df_train['Family'].map(lambda s: 1 if 3 <= s <= 4 else 0)
+df_train['LargeF'] = df_train['Family'].map(lambda s: 1 if s >= 5 else 0)
