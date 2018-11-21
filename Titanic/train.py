@@ -82,3 +82,4 @@ def impute_fare(cols):
 
     else:
         return Fare
+df_train['Age'] = df_train[['Age','Pclass']].apply(impute_age,axis=1)
