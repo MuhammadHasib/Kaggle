@@ -114,3 +114,31 @@ df_test['Single'] = df_test['Family'].map(lambda s: 1 if s == 1 else 0)
 df_test['SmallF'] = df_test['Family'].map(lambda s: 1 if  s == 2  else 0)
 df_test['MedF']   = df_test['Family'].map(lambda s: 1 if 3 <= s <= 4 else 0)
 df_test['LargeF'] = df_test['Family'].map(lambda s: 1 if s >= 5 else 0)
+
+def get_person(passenger):
+    age,sex = passenger
+    return 'child' if age < 16 else sex
+
+df_train['Person'] = df_train[['Age','Sex']].apply(get_person,axis=1)
+df_test['Person']  = df_test[['Age','Sex']].apply(get_person,axis=1)
+
+person_dummies_train  = pd.get_dummies(df_train['Person'])
+person_dummies_train.columns = ['Child','Female','Male']
+person_dummies_train.drop(['Male'], axis=1, inplace=True)
+
+person_dummies_test  = pd.get_dummies(df_test['Person'])
+person_dummies_test.columns = ['Child','Female','Male']
+person_dummies_test.drop(['Male'], axis=1, inplace=True)
+
+df_train = df_train.join(person_dummies_train)
+df_test  = df_test.join(person_dummies_test)
+
+df_train.drop(['Person'],axis=1,inplace=True)
+df_test.drop(['Person'],axis=1,inplace=True)
+
+df_train.drop(['Sex','Embarked'],axis=1,inplace=True)
+df_test.drop(['Sex','Embarked'],axis=1,inplace=True)
+
+df_train.info()
+print('.............................................')
+df_test.info()
