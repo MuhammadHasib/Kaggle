@@ -65,3 +65,20 @@ def impute_age(cols):
 
     else:
         return Age
+def impute_fare(cols):
+    Fare = cols[0]
+    Pclass = cols[1]
+    
+    if pd.isnull(Fare):
+
+        if Pclass == 1:
+            return 84
+
+        elif Pclass == 2:
+            return 20
+
+        else:
+            return 13
+
+    else:
+        return Fare
