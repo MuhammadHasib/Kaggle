@@ -154,3 +154,14 @@ Scaler1 = StandardScaler()
 Scaler2 = StandardScaler()
 X_train_scaled = Scaler1.fit_transform(X_train)
 df_test_scaled  = Scaler2.fit_transform(df_test)
+logmodel = LogisticRegression()
+logmodel.fit(X_train,y_train)
+
+y_pred = pd.DataFrame(logmodel.predict(df_test))
+
+y_pred['Survived'] = y_pred[0]
+y_pred.drop(0,axis=1,inplace=True)
+y_pred['PassengerId'] = df_test['PassengerId']
+y_pred_lr = y_pred
+logmodel.score(X_train,y_train)
+logmodel.score(X_test,y_test)
