@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from collections import Counter
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
 
 df_train = pd.read_csv('train.csv')
 df_test  = pd.read_csv('test.csv')
@@ -148,14 +150,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(df_train.drop('Survived',axis=1), 
                                                     df_train['Survived'], test_size=0.30, 
                                                     random_state=101)
-from xgboost import XGBClassifier
-
-XGB = XGBClassifier(max_depth=5,learning_rate=0.05,n_estimators=100,n_jobs=-1)
-XGB.fit(X_train,y_train)
-XGB.score(X_train,y_train)
-XGB.score(X_test,y_test)
-y_pred = pd.DataFrame(XGB.predict(df_test))
-y_pred['Survived'] = y_pred[0]
-y_pred.drop(0,axis=1,inplace=True)
-y_pred['PassengerId'] = df_test['PassengerId']
-y_pred_xgb = y_pred
+Scaler1 = StandardScaler()
+Scaler2 = StandardScaler()
+X_train_scaled = Scaler1.fit_transform(X_train)
+df_test_scaled  = Scaler2.fit_transform(df_test)
