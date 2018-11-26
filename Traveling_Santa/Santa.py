@@ -30,3 +30,6 @@ def sieve_eratosthenes(n):
                 primes[i] = False
         p += 1
     return primes
+
+primes = np.array(sieve_eratosthenes(nb_cities)).astype(int)
+df['Prime'] = primes
