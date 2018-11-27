@@ -33,3 +33,9 @@ def sieve_eratosthenes(n):
 
 primes = np.array(sieve_eratosthenes(nb_cities)).astype(int)
 df['Prime'] = primes
+penalization = 0.1 * (1 - primes) + 1
+
+plt.figure(figsize=(15, 10))
+sns.countplot(df.Prime)
+plt.title("Prime repartition : " + str(Counter(df.Prime)))
+plt.show()
