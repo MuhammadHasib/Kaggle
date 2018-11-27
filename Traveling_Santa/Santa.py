@@ -47,3 +47,11 @@ plt.scatter(df.iloc[0: 1, 1], df.iloc[0: 1, 2], s=10, c="red")
 plt.grid(False)
 plt.title('Visualisation of cities')
 plt.show()
+
+def dist_matrix(coords, i, penalize=False):
+    begin = np.array([df.X[i], df.Y[i]])[:, np.newaxis]
+    mat =  coords - begin
+    if penalize:
+        return np.linalg.norm(mat, ord=2, axis=0) * penalization
+    else:
+        return np.linalg.norm(mat, ord=2, axis=0)
