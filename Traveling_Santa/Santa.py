@@ -55,3 +55,6 @@ def dist_matrix(coords, i, penalize=False):
         return np.linalg.norm(mat, ord=2, axis=0) * penalization
     else:
         return np.linalg.norm(mat, ord=2, axis=0)
+
+def get_next_city(dist, avail):
+    return avail[np.argmin(dist[avail])]
