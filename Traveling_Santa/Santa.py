@@ -58,3 +58,7 @@ def dist_matrix(coords, i, penalize=False):
 
 def get_next_city(dist, avail):
     return avail[np.argmin(dist[avail])]
+coordinates = np.array([df.X, df.Y])
+current_city = 0
+left_cities = np.array(df.CityId)[1:]
+path = [0]
