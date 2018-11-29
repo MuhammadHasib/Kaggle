@@ -62,3 +62,4 @@ coordinates = np.array([df.X, df.Y])
 current_city = 0
 left_cities = np.array(df.CityId)[1:]
 path = [0]
+stepNumber = 1
