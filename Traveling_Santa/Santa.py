@@ -81,3 +81,8 @@ while left_cities.size > 0:
     path.append(current_city)
     # Add one step
     stepNumber += 1
+
+print(f"Loop lasted {(time() - t0) // 60} minutes ")
+
+path.append(0)
+print(len(path) == len(df) + 1)
