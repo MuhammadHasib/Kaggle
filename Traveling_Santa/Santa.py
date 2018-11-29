@@ -96,3 +96,5 @@ def plot_path(path, coordinates):
     plt.grid(False)
     ax.add_collection(lc)
     ax.autoscale()
+
+plot_path(path, coordinates)
