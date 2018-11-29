@@ -86,3 +86,13 @@ print(f"Loop lasted {(time() - t0) // 60} minutes ")
 
 path.append(0)
 print(len(path) == len(df) + 1)
+
+def plot_path(path, coordinates):
+    # Plot tour
+    lines = [[coordinates[: ,path[i-1]], coordinates[:, path[i]]] for i in range(1, len(path)-1)]
+    lc = mc.LineCollection(lines, linewidths=2)
+    fig, ax = plt.subplots(figsize=(20,20))
+    ax.set_aspect('equal')
+    plt.grid(False)
+    ax.add_collection(lc)
+    ax.autoscale()
