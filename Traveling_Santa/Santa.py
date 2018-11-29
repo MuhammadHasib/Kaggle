@@ -63,3 +63,21 @@ current_city = 0
 left_cities = np.array(df.CityId)[1:]
 path = [0]
 stepNumber = 1
+
+t0 = time()
+
+while left_cities.size > 0:
+    if stepNumber % 10000 == 0: #We print the progress of the algorithm
+        print(f"Time elapsed : {time() - t0} - Number of cities left : {left_cities.size}")
+    # If we are at the ninth iteration (modulo 10), we may want to go to a prime city. Note that there is an approximation here: we penalize the path to the 10th city insted of 11th
+    favorize_prime = (stepNumber % 10 == 9)
+    # Compute the distance matrix
+    distances = dist_matrix(coordinates, current_city, penalize=favorize_prime)
+    # Get the closest city and go to it
+    current_city = get_next_city(distances, left_cities)
+    # Update the list of not visited cities
+    left_cities = np.setdiff1d(left_cities, np.array([current_city]))
+    # Append the city to the path
+    path.append(current_city)
+    # Add one step
+    stepNumber += 1
