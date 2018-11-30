@@ -98,3 +98,20 @@ def plot_path(path, coordinates):
     ax.autoscale()
 
 plot_path(path, coordinates)
+
+def get_score(path, coords, primes):
+    score = 0
+    for i in range(1, len(path)):
+        begin = path[i-1]
+        end = path[i]
+        distance = np.linalg.norm(coords[:, end] - coords[:, begin], ord=2)
+        if i%10 == 0:
+            if not primes[begin]:
+                distance *= 1.1
+        score += distance
+    return score
+
+score = get_score(path, coordinates, primes)
+
+print("Solution scored ", score)
+print(score - get_score(path[:-1], coordinates, primes))
