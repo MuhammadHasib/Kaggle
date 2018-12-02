@@ -114,4 +114,3 @@ def get_score(path, coords, primes):
 score = get_score(path, coordinates, primes)
 
 print("Solution scored ", score)
-print(score - get_score(path[:-1], coordinates, primes))
