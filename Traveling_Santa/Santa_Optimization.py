@@ -19,3 +19,6 @@ def total_distance(dfcity,path):
         prev_city = next_city
         step_num = step_num + 1
     return total_distance
+
+santa_cities = pd.read_csv('../input/cities.csv')
+santa_cities.head()
