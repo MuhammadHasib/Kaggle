@@ -36,3 +36,7 @@ def sieve_of_eratosthenes(n):
                 primes[i*k] = False
                 k += 1
     return(primes)
+
+# find cities that are prime numbers
+prime_cities = sieve_of_eratosthenes(max(santa_cities.CityId))
+santa_cities['prime'] = prime_cities
