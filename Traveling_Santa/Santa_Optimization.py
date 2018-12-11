@@ -40,3 +40,12 @@ def sieve_of_eratosthenes(n):
 # find cities that are prime numbers
 prime_cities = sieve_of_eratosthenes(max(santa_cities.CityId))
 santa_cities['prime'] = prime_cities
+
+# add a few columns
+santa_cities = pd.concat([santa_cities,pd.DataFrame(columns=['next_city',
+                                                             'next_city_distance'
+                                                            ]
+                                                   )],sort=False)
+santa_cities[['next_city','next_city_distance']] = santa_cities[['next_city','next_city_distance']].astype(float)
+
+santa_cities.head(10
