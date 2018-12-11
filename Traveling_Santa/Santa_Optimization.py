@@ -23,3 +23,16 @@ def total_distance(dfcity,path):
 santa_cities = pd.read_csv('../input/cities.csv')
 santa_cities.head()
 santa_cities.describe()
+
+def sieve_of_eratosthenes(n):
+    n = int(n)
+    primes = [True for i in range(n+1)] # Start assuming all numbers are primes
+    primes[0] = False # 0 is not a prime
+    primes[1] = False # 1 is not a prime
+    for i in range(2,int(np.sqrt(n)) + 1):
+        if primes[i]:
+            k = 2
+            while i*k <= n:
+                primes[i*k] = False
+                k += 1
+    return(primes)
