@@ -78,3 +78,13 @@ for i in range(1,nn_indices.shape[1]):
     # clear data for all duplicates
     santa_cities.at[santa_cities['duplicate'] == True,'next_city'] = np.nan
     santa_cities.at[santa_cities['duplicate'] == True,'next_city_distance'] = np.nan
+    # TO DO - determine if I can remove this section of code with the merge
+    # check for one step recursive links between cities
+    santa_cities_test = santa_cities[['CityId','next_city']]
+    santa_cities_test.rename(columns={'CityId': 'next_city', 'next_city': 'compare_city'}, inplace=True)
+    santa_cities = santa_cities.reset_index().merge(santa_cities_test,
+                                                    on='next_city',
+                                                    how='left').set_index('index')
+    santa_cities.at[santa_cities['compare_city'] == santa_cities['CityId'],'next_city'] = np.nan
+    santa_cities.at[santa_cities['compare_city'] == santa_cities['CityId'],'next_city_distance'] = np.nan
+    santa_cities.drop(columns=['compare_city'], inplace=True)
