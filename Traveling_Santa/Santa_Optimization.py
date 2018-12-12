@@ -70,3 +70,11 @@ for i in range(1,nn_indices.shape[1]):
     # set next_city to nearest neighbor in this layer
     santa_cities['next_city'].update(santa_cities_remaining['NN_city'])
     santa_cities['next_city_distance'].update(santa_cities_remaining['NN_distance'])
+    # sort by the distance of nearest neighbors to favor shorter distances
+    santa_cities = santa_cities.sort_values(by=['next_city_distance'],ascending=True)
+    
+    # mark all duplicates of next_city except for the first with the shortest distance
+    santa_cities['duplicate'] = santa_cities.duplicated(subset='next_city', keep="first")
+    # clear data for all duplicates
+    santa_cities.at[santa_cities['duplicate'] == True,'next_city'] = np.nan
+    santa_cities.at[santa_cities['duplicate'] == True,'next_city_distance'] = np.nan
