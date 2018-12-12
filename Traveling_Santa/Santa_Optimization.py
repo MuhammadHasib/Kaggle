@@ -48,4 +48,18 @@ santa_cities = pd.concat([santa_cities,pd.DataFrame(columns=['next_city',
                                                    )],sort=False)
 santa_cities[['next_city','next_city_distance']] = santa_cities[['next_city','next_city_distance']].astype(float)
 
-santa_cities.head(10
+santa_cities.head(10)
+
+# find the optimal nearest neighbor for each row
+# exclude index row 0 to ensure that doesn't get assigned until the end
+santa_cities_to_analyze = santa_cities.iloc[1:, 1:3]
+nbrs = NearestNeighbors(n_neighbors=100, algorithm='ball_tree').fit(santa_cities_to_analyze)
+nn_distances, nn_indices = nbrs.kneighbors(santa_cities_to_analyze)
+
+# loop through each layer of nearest neighbors
+for i in range(1,nn_indices.shape[1]):
+    # only get rows where next_city is null
+    santa_cities_remaining = santa_cities.loc[santa_cities['next_city'].isnull()]
+    santa_cities_remaining = pd.concat([santa_cities_remaining,
+                                        pd.DataFrame(columns=['NN_city','NN_distance'])],
+                                       sort=False)
