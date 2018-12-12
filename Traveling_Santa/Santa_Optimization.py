@@ -63,3 +63,10 @@ for i in range(1,nn_indices.shape[1]):
     santa_cities_remaining = pd.concat([santa_cities_remaining,
                                         pd.DataFrame(columns=['NN_city','NN_distance'])],
                                        sort=False)
+
+    # get potential nearest neighbors in this layer
+    santa_cities_remaining['NN_city'] = pd.Series(data=nn_indices[:,i])
+    santa_cities_remaining['NN_distance'] = pd.Series(data=nn_distances[:,i])
+    # set next_city to nearest neighbor in this layer
+    santa_cities['next_city'].update(santa_cities_remaining['NN_city'])
+    santa_cities['next_city_distance'].update(santa_cities_remaining['NN_distance'])
