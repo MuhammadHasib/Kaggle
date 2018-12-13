@@ -108,3 +108,6 @@ for i in range(1,nn_indices.shape[1]):
     santa_cities.at[santa_cities['next_city_order'] < santa_cities['city_order'],'next_city'] = np.nan
     santa_cities.at[santa_cities['next_city_order'] < santa_cities['city_order'],'next_city_distance'] = np.nan
     santa_cities.drop(columns=['city_order','next_city_order'], inplace=True)
+    # ensure 0 doesn't get marked as a next_city and is left for the very end
+    santa_cities.at[santa_cities['next_city'] == 0,'next_city'] = np.nan
+    santa_cities.at[santa_cities['next_city'] == 0,'next_city_distance'] = np.nan
