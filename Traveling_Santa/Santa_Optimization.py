@@ -97,3 +97,11 @@ for i in range(1,nn_indices.shape[1]):
     santa_cities.at[0,'next_city_distance'] = 7.358130
     santa_recursion = santa_cities.loc[~santa_cities['next_city'].isnull()]
     city_to_travel_next = 0
+    for i in range(1,len(santa_recursion)):
+        current_city = city_to_travel_next
+        santa_cities.at[santa_cities['CityId'] == current_city,'city_order'] = i
+        santa_cities.at[santa_cities['next_city'] == current_city,'next_city_order'] = i
+        try:
+            city_to_travel_next= int(santa_cities.at[current_city,'next_city'])
+        except:
+            break
