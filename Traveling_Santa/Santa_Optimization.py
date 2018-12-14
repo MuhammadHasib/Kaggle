@@ -123,3 +123,22 @@ santa_cities.index.name = None
 santa_cities.head(10)
 
 print("Total optimized nn attempt distance so far is {:,}".format(santa_cities['next_city_distance'].sum()))
+
+#santa_cities.nunique()
+
+#santa_path = []
+#city_to_travel_next = int(0)
+#santa_path_cities = santa_cities.loc[~santa_cities['next_city'].isnull()]
+
+#for i in range(1,len(santa_cities)): #len(santa_cities)
+#    current_city = city_to_travel_next
+#    santa_path.append(current_city)
+#    city_to_travel_next = int(santa_cities.iloc[current_city,4])
+
+#santa_path.append(0)
+#len(santa_path)
+
+# check for recursion in travel path
+#print(len(set(santa_path)))
+
+#print("Total optimized nn attempt distance is {:,}".format(total_distance(santa_cities,santa_path)))
