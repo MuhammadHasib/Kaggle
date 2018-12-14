@@ -111,3 +111,8 @@ for i in range(1,nn_indices.shape[1]):
     # ensure 0 doesn't get marked as a next_city and is left for the very end
     santa_cities.at[santa_cities['next_city'] == 0,'next_city'] = np.nan
     santa_cities.at[santa_cities['next_city'] == 0,'next_city_distance'] = np.nan
+    # sort index to normal ordering again
+    santa_cities.sort_index(inplace=True)
+
+# show number of remaining cities that still need a next_city
+print(santa_cities['next_city'].isnull().sum())
