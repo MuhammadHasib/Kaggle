@@ -116,3 +116,8 @@ for i in range(1,nn_indices.shape[1]):
 
 # show number of remaining cities that still need a next_city
 print(santa_cities['next_city'].isnull().sum())
+
+if 'duplicate' in santa_cities.columns:
+    santa_cities.drop(columns=['duplicate'],inplace=True)
+santa_cities.index.name = None
+santa_cities.head(10)
