@@ -121,3 +121,5 @@ if 'duplicate' in santa_cities.columns:
     santa_cities.drop(columns=['duplicate'],inplace=True)
 santa_cities.index.name = None
 santa_cities.head(10)
+
+print("Total optimized nn attempt distance so far is {:,}".format(santa_cities['next_city_distance'].sum()))
