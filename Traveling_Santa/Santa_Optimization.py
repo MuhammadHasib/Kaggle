@@ -137,7 +137,3 @@ print("Total optimized nn attempt distance so far is {:,}".format(santa_cities['
 
 #santa_path.append(0)
 #len(santa_path)
-
-# check for recursion in travel path
-#print(len(set(santa_path)))
-
