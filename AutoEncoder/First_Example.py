@@ -11,5 +11,3 @@ encoded = Dense(encoding_dim, activation='relu')(input_img)
 # "decoded" is the lossy reconstruction of the input
 decoded = Dense(784, activation='sigmoid')(encoded)
 
-# this model maps an input to its reconstruction
-autoencoder = Model(input_img, decoded)
