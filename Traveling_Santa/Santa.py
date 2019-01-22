@@ -46,7 +46,6 @@ plt.scatter(df[df['Prime'] == 1].X, df[df['Prime'] == 1].Y, s=1, alpha=0.6, c='b
 plt.scatter(df.iloc[0: 1, 1], df.iloc[0: 1, 2], s=10, c="red")
 plt.grid(False)
 plt.title('Visualisation of cities')
-plt.show()
 
 def dist_matrix(coords, i, penalize=False):
     begin = np.array([df.X[i], df.Y[i]])[:, np.newaxis]
